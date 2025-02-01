@@ -1,13 +1,23 @@
 import { useState } from "react";
 import { createArray } from "../utils/createArray";
-import { addToList } from "../db";
-export function AddForm() {
+// import { addToList } from "../db";
+
+export function AddForm({ item, onAddItem }) {
   const [description, setDescripton] = useState("");
   const [quantity, setQuantity] = useState(1);
 
   function HandleSubmit(e) {
     e.preventDefault();
-    addToList(quantity, description);
+    if (!description) {
+      return;
+    }
+    const itemList = {
+      id: item.length + 1,
+      quantity: quantity,
+      description: description,
+      isPacked: false,
+    };
+    onAddItem(itemList);
   }
   return (
     <form className="add-form" onSubmit={(e) => HandleSubmit(e)}>
@@ -34,20 +44,7 @@ export function AddForm() {
           setDescripton(e.target.value);
         }}
       />
-      <button type="Submit">ADD</button>
-    </form>
-  );
-}
-
-export function ActionForm() {
-  return (
-    <form className="actions">
-      <select>
-        <option value="input">SORT BY INPUT ORDER</option>
-        <option value="description">SORT BY DESCRIPTION </option>
-        <option value="packed">SORT BY PACKED STATUS</option>
-      </select>
-      <button>CLEAR LIST</button>
+      <button type="submit">ADD</button>
     </form>
   );
 }
