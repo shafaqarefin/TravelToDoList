@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { createArray } from "../utils/createArray";
-// import { addToList } from "../db";
 
 export function AddForm({ item, onAddItem }) {
   const [description, setDescripton] = useState("");
@@ -12,7 +11,7 @@ export function AddForm({ item, onAddItem }) {
       return;
     }
     const itemList = {
-      id: item.length + 1,
+      id: crypto.randomUUID(),
       quantity: quantity,
       description: description,
       isPacked: false,
