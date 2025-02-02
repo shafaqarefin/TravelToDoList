@@ -1,7 +1,16 @@
-export function Stats() {
+export function Stats({ numberOfItems, numberOfPacked, percentageCompleted }) {
   return (
     <footer className="stats">
-      <p>💼 You have 1 items on your list, and you already packed 0 (0%)</p>
+      {percentageCompleted === 100 ? (
+        <p>You got everything! Ready to go ✈️</p>
+      ) : numberOfItems > 0 ? (
+        <p>
+          💼 You have {numberOfItems} items on your list, and you already packed{" "}
+          {numberOfPacked} items ({percentageCompleted}%)
+        </p>
+      ) : (
+        <p>Start adding some items to your packing list 🚀</p>
+      )}
     </footer>
   );
 }
