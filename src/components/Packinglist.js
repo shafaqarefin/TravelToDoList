@@ -1,19 +1,31 @@
+import { useState } from "react";
 import { Items } from "./Item.js";
-// import * as Form from "./Form.js";
-// import { travelList } from "../db.js";
+
 export function PackingList({
   itemsList,
   onClearList,
   onDeleteItem,
   handleChecked,
 }) {
-  function arrangeList(e) {}
+  const [sortType, setSortType] = useState("input");
+  let sortedList;
+  if (sortType === "input") {
+    sortedList = itemsList;
+  } else if (sortType === "description") {
+    sortedList = itemsList
+      .slice()
+      .sort((a, b) => a.description.localeCompare(b.description));
+  } else {
+    sortedList = itemsList
+      .slice()
+      .sort((a, b) => Number(a.isPacked) - Number(b.isPacked));
+  }
 
   return (
     <>
       <div className="list">
         <ul>
-          {itemsList.map((items) => (
+          {sortedList.map((items) => (
             <Items
               items={items}
               onDeleteItem={onDeleteItem}
@@ -22,7 +34,10 @@ export function PackingList({
           ))}
         </ul>
         <div className="actions">
-          <select onChange={arrangeList}>
+          <select
+            value={sortType}
+            onChange={(e) => setSortType(e.target.value)}
+          >
             <option value="input">SORT BY INPUT ORDER</option>
             <option value="description">SORT BY DESCRIPTION </option>
             <option value="packed">SORT BY PACKED STATUS</option>
