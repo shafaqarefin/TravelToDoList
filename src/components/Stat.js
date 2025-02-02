@@ -1,4 +1,9 @@
-export function Stats({ numberOfItems, numberOfPacked, percentageCompleted }) {
+export function Stats({ item }) {
+  const numberOfItems = item.length;
+  const numberOfPacked = item.filter((items) => items.isPacked).length;
+  const percentageCompleted = Math.round(
+    (numberOfPacked / numberOfItems) * 100
+  );
   return (
     <footer className="stats">
       {percentageCompleted === 100 ? (
