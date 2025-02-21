@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createArray } from "../utils/createArray";
 
-export function AddForm({ item, onAddItem }) {
+export function AddForm({ onAddItem }) {
   const [description, setDescripton] = useState("");
   const [quantity, setQuantity] = useState(1);
 

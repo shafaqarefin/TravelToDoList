@@ -28,7 +28,7 @@ function App() {
   return (
     <div className="app">
       <Logo />
-      <AddForm onAddItem={onAddItem} item={item} />
+      <AddForm onAddItem={onAddItem} />
       <PackingList
         itemsList={item}
         onClearList={onClearList}
